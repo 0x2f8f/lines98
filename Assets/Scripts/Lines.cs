@@ -7,7 +7,7 @@ public class Lines
 {
     public const int SIZE = 9;
     public const int BALLS = 7;
-    const int ADD_BALLS = 6;
+    const int ADD_BALLS = 3;
     const int CUT_BALLS = 5;
 
     ShowBox showBox;
@@ -76,6 +76,12 @@ public class Lines
 
     public void Click(int x, int y)
     {
+        if (isGameOver()) {
+            Start();
+
+            return;
+        }
+
         if (map[x, y] > 0) {
             TakeBall(x, y);
         } else {
@@ -226,5 +232,18 @@ public class Lines
                 }
             }
         }
+    }
+
+    private bool isGameOver()
+    {
+        for (int x = 0; x < SIZE; x++) {
+            for (int y = 0; y < SIZE; y++) {
+                if (map[x, y] == 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
